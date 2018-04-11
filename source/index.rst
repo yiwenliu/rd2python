@@ -10,6 +10,15 @@ Welcome to road2python's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   read-cmd-args
+   magic-method
+   session-controller
+   iterator
+   generator
+   closure
+   decorator
+   property
+
 
 
 Indices and tables
