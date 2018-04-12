@@ -12,7 +12,7 @@ python魔术方法是python面向对象的一切。
 
 How to call magic method
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-注意，在客户端代码中有固定的写法用来告知程序自动调用相应的魔术方法。
+学习魔术方法有一个重点和难点——在客户端代码中有固定的写法用来告知程序自动调用相应的魔术方法。
 
 .. image:: _images/python-magic-method.png
 

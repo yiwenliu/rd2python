@@ -11,6 +11,7 @@ Welcome to road2python's documentation!
    :caption: Contents:
 
    read-cmd-args
+   function
    magic-method
    session-controller
    iterator
@@ -18,6 +19,7 @@ Welcome to road2python's documentation!
    closure
    decorator
    property
+   descriptor
 
 
 

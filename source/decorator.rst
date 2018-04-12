@@ -1,7 +1,11 @@
 Decorator
 ============
+Relationship between decorator and closure
+--------------------------------------------
+Decorators in Python make an extensive use of closures as well.
+
 python为什么要引入decorator的概念
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------
 在设计模式中有Decorator这一模式，用来生成对象，特点是有一个核心类和一堆装饰类。
 
 Decorators in python is to add functionality to an existing code(function). 
@@ -15,7 +19,7 @@ Decorators in python is to add functionality to an existing code(function).
 **A**:因为decorated 客户function实现的是核心功能，所以在“客户端代码”中，还是要出现调用decorated function的形式，decoreated_function_name()
 
 How to use
-^^^^^^^^^^^^
+------------
 1. 第一步，定义一个decorator function
 
 - 如何区分decorator和普通function呢？以function作为参数的就是decorator
@@ -57,12 +61,16 @@ How to use
 3. 第三步，call the decorated function 
 
 Examples
-^^^^^^^^^^
+-----------
 1. `在除法运算前检查除数非零 <https://www.programiz.com/python-programming/decorator#decorating>`_
 
 - 存在一个实现除法运算的核心函数
 - 在运行核心功能前需要实现一个检查的功能
 
-2. `decorator chain <https://www.programiz.com/python-programming/decorator#chaining>`_
+.. _decorator-chain:
+
+Decorator chain
+------------------
+`示例代码 <https://www.programiz.com/python-programming/decorator#chaining>`_
 
 - 上面这个链接中的例子像极了decorator design pattern
