@@ -4,25 +4,18 @@ Relationship between decorator and closure
 --------------------------------------------
 Decorators in Python make an extensive use of closures as well.
 
-python为什么要引入decorator的概念
+python为什么要引入decorator
 ---------------------------------
 在设计模式中有Decorator这一模式，用来生成对象，特点是有一个核心类和一堆装饰类。
 
-Decorators in python is to add functionality to an existing code(function). 
-
-- **Q**:对于一个不能修改函数体的现存的函数，如何才能给它增加功能呢？
-
-**A**:把decorated function作为参数传入decorator
-
-- **Q**:既然以decorated function作为形参，decorator为什么不在其函数体中，在调用decorated function前后，实现它想增加的功能就可以了呢，为什么还要以closure的方式返回一个函数对象呢？
-
-**A**:因为decorated 客户function实现的是核心功能，所以在“客户端代码”中，还是要出现调用decorated function的形式，decoreated_function_name()
+Decorators in python is to add functionality to an existing code(function or class). 
 
 How to use
 ------------
 1. 第一步，定义一个decorator function
 
 - 如何区分decorator和普通function呢？以function作为参数的就是decorator
+- decorator为什么要返回nested function?因为要使用@decorator，就必须这么做
 - 注意：其中nested function的形参必须和decorated functin相同，因为decorator要返回nested function object，那么如何定义一个可以修饰任意数量参数的“被修饰函数”的decorator呢？
 
 .. code-block:: python
@@ -74,3 +67,33 @@ Decorator chain
 `示例代码 <https://www.programiz.com/python-programming/decorator#chaining>`_
 
 - 上面这个链接中的例子像极了decorator design pattern
+
+decorator可以修饰的对象
+-----------------------
+@decorator可以修饰function, class等，因为在python中，function和class都是object
+
+带参数的“函数decorator”
+^^^^^^^^^^^^^^^^^^^^^^^^
+前面所讲的decorator都以function作为参数，那么有没有可能给decorator function传入一些其他的非function参数呢？如此，可以发挥closure的作用。
+
+场景和解决方法
++++++++++++++++
+`给函数添加日志功能，同时允许用户指定日志的级别和其他的选项 <http://python3-cookbook.readthedocs.io/zh_CN/latest/c09/p04_define_decorator_that_takes_arguments.html>`_
+
+上述链接所包含的代码中：
+
+- decorate()首先是一个closure function，然后才是decorator function
+- @logged()的实际执行过程在链接中也有讨论
+
+带参数的“类型装饰器”
+^^^^^^^^^^^^^^^^^^^^^
+`重写类定义的某部分(方法)来修改它的行为，但是你又不希望使用继承或元类的方式 <http://python3-cookbook.readthedocs.io/zh_CN/latest/c09/p12_using_decorators_to_patch_class_definitions.html>`_
+
+python自带的decorator
+----------------------
+@staticmethod
+^^^^^^^^^^^^^^^
+@classmethod
+^^^^^^^^^^^^^^
+@property
+^^^^^^^^^^

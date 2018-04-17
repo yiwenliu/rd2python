@@ -10,7 +10,9 @@ Welcome to road2python's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   object
    read-cmd-args
+   data-type
    function
    magic-method
    session-controller
