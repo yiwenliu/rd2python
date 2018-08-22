@@ -10,6 +10,7 @@ Welcome to road2python's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   python-init
    object
    read-cmd-args
    data-type
