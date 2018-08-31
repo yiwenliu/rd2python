@@ -11,6 +11,8 @@ Welcome to road2python's documentation!
    :caption: Contents:
 
    python-init
+   codec
+   io
    object
    read-cmd-args
    data-type
