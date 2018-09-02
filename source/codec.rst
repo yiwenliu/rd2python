@@ -117,15 +117,21 @@ str类型的实例采用unicode编码，除此之外，无论采用utf8或其他
     >>> s2 = s1.encode('utf-8')
     >>> type(s2)
     <class 'bytes'>
+    >>> s1
+    '我'
     >>> s2  
-    b'\xe6\x88\x91'  #b表示bytes
+    b'\xe6\x88\x91'  #b表示bytes，\x表示16进制，因为e6超出ascii的范围，所以只能如此显示.
+                     #为什么不显示成b'我'？python不会存储bytes实例对象的编码类型，就不会把
+                     #这3个字节当成“我”的utf-8编码而合起来考虑。
     >>> s4 = b'hehe'
     >>> type(s4)
     <class 'bytes'>
+    >>> s4
+    b'hehe'          #ascii范围内的编码可以显示对应的字符，所以不会显示成b'\x..\x..'
     
 
-python2源码剖析
-------------------
+python2字符序列的源码剖析
+-----------------------------
 在PyStringObject的类型对象PyString_Type中，tp_itemsize指明了由变长对象保存的元素（item）的单位长度，所谓单位长度就是指一个元素在内存中的长度（字节数）。
 
 在python3中，str类型默认单位长度是4，而bytes类型的是1。
@@ -137,6 +143,8 @@ bytes实例和str实例之间的转化无需借助外部函数。
 
 - bytes实例转化为str实例的方法就定义在bytes类型对象中，decode()，任何bytes实例都可以调用这个方法，但是，bytes的编码格式必须要事先知道，因为它要以参数传入decode()。
 - str类型对象中的方法，encode(), 可以使str实例转化为bytes实例。
+
+.. _detect-codec:
 
 识别bytes的编码
 --------------------
@@ -184,13 +192,5 @@ The default **encoding** is platform dependent (whatever locale.getpreferredenco
     UnicodeDecodeError: 'gbk' codec can't decode byte 0x86 in position 14: incomplet
     e multibyte sequence
     >>> f = open('D:\\temp\\p3\\utf8.txt', 'r',encoding='utf-8')
-    >>> print(f.read())
+    >>> print(f.read()) #f.read()返回的是str对象
     ﻿我想你了
-
-read()返回的是str or bytes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-python3中，如果read()能正确返回，都是str。这符合pythonic的信条之一,"程序的核心部分应该使用unicode，对文件的读/写都应该算作界面外围"
-
-正确的做法
-^^^^^^^^^^^^
-以'wb'打开文件
