@@ -13,6 +13,9 @@ Welcome to road2python's documentation!
    execution-model
    python-init
    codec
+   dict
+   sequence
+   list
    io
    object
    read-cmd-args

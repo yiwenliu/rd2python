@@ -19,6 +19,12 @@ Unicode
 
 Unicode 字符编码标准是固定长度的字符编码方案，它包含了世界上几乎所有现用语言的字符。缺省编码格式是 16 位，即每个字符是 16 位（两个字节，UCS-2 ）宽，并且通常显示为 U+hhhh，其中 hhhh 是字符的十六进制代码点，即可以表示不多于65536种字符。
 
+find out if Python is compiled with UCS-2 or UCS-4
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. image:: _images/ucs2or4.png
+
+在我的笔记本的64bit anaconda with python3.6，查得是UCS-4。
+
 UTF-8
 --------
 Unicode转换格式（Unicode Transformation Format，简称为UTF）
@@ -57,12 +63,6 @@ Little endian 和 Big endian
 Unicode 规范定义，每一个文件的最前面分别加入一个表示编码顺序的字符，这个字符的名字叫做"零宽度非换行空格"（zero width no-break space），用FEFF表示。这正好是两个字节，而且FF比FE大1。
 
 如果一个文本文件的头两个字节是FE FF，就表示该文件采用大头方式；如果头两个字节是FF FE，就表示该文件采用小头方式。
-
-find out if Python is compiled with UCS-2 or UCS-4
--------------------------------------------------------
-.. image:: _images/ucs2or4.png
-
-在我的笔记本的64bit anaconda with python3.6，查得是UCS-4。
 
 bytes和str在python3中是什么
 ----------------------------
