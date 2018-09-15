@@ -70,3 +70,23 @@ PyListObject in python2
     [1, 2, 3, 4, 5]
     >>> a
     [9, 2, 3, 4, 5]
+
+list comprehension
+------------------------
+根据一份列表来制作另一份列表时，就用“列表推导式”。
+
+1. 用[]包围的comprehension生成的是一个真正的list，
+2. 用()包围的comprehension是一个generator object，而不是一个tuple。
+
+.. code-block:: python
+    :linenos:
+
+    >>> a
+    [10, 'a', 'f', 'g', 4, 5]
+    >>> tu = (x for x in a)
+    >>> tu
+    <generator object <genexpr> at 0x0000000002B86C50>
+    >>> type(tu)
+    <class 'generator'>
+
+3. 用{}包围的comprehension生成的是一个dict object
