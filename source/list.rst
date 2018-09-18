@@ -3,6 +3,36 @@ list
 PyListObject in python2
 -----------------------------
 
+class list in python3
+------------------------
+class list([iterable])
+
+初始化
+---------
+
+1. 初始化一个长度为N的list object
+
+下面的代码示范的3种初始化list object的方法中，2种对的，1种错误。
+
+.. code-block:: python
+    :linenos:
+
+    #1.用列表推导式初始化
+    >>> lt = [None for i in range(5)]
+    >>> lt
+    [None, None, None, None, None]
+    >>> len(lt)
+    5
+    #2.Using the type constructor
+    >>> lt = list(range(5))
+    >>> lt
+    [0, 1, 2, 3, 4]
+    #3.不可以直接指定list的长度
+    >>> lt = list(5)
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    TypeError: 'int' object is not iterable
+
 访问单个元素而不产生异常
 --------------------------
 访问列表中单个元素时，下标越界，会导致异常，IndexError: list index out of range
