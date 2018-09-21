@@ -1,12 +1,10 @@
 Iterator(迭代器)
 =================
-Intro
-^^^^^^
-iterator是一种“设计模式”，和“观察者模式”、“访问者模式”同属于“面向任务的模式”，用于“执行及描述任务”。
+迭代器模式
+^^^^^^^^^^^^^^^
+iterator是一种“设计模式”，和“观察者模式”、“访问者模式”同属于“面向任务的模式”，用于“执行及描述任务”。其目的是"提供一种方法访问一个容器对象中各个元素，而又不暴露该对象的内部细节。"
 
-各种语言实作迭代器的方式皆不尽同，有些面向对象语言像Java, C#, Ruby, Python, Delphi都已将迭代器的特性内建语言当中，完美的跟语言整合，我们称之隐式迭代器（implicit iterator）
-
-迭代器另一方面还可以整合生成器（generator）。有些语言将二者视为同一界面，有些语言则将之独立化。
+.. image:: _images/iterator-dp.jpg
 
 Reference
 ^^^^^^^^^^^
@@ -20,25 +18,26 @@ Technically speaking, Python iterator object must implement two special methods,
 
 一个实现这个成员方法的iterator就把自身也变成了一个iterable，就可以使用在 **for loop** 中了。见下面的小节“How for loop actually works”
 
-Built-in functions using iterable in Python
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-python很对的内建的函数的参数都是iterable，例如
-
-- sum(iterable[, start])
-- max(iterable, \*iterables[,key, default])
-- for element in iterable
-
 what is iterable&iterator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Iterator in Python is simply an object that can be iterated upon. An object which will return data, one element at a time. In the other words, iterator必须实现__iter__()和__next__()
 
 An object is called iterable if we can get an iterator from it throught iter() function.In the other words, iterable只需要实现__iter__()
 
-built-in iterable containers
+Built-in functions using iterable 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python很多内建的函数的参数都是iterable，例如
+
+- sum(iterable[, start])
+- max(iterable, \*iterables[,key, default])
+- for element in iterable
+
+Built-in iterable containers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Most of built-in containers in Python like: list, tuple, string etc. are iterables.
 
 .. code-block:: none
+	:linenos:
 
 	>>> x = [42,23,24]
 	#从可迭代(iterable)对象中获取iterator
@@ -54,9 +53,9 @@ Most of built-in containers in Python like: list, tuple, string etc. are iterabl
 	42
 	#next(obj) is same as obj.__next__()
 	>>> it.__next__()
-    23
-    #built-in iterable container不能被next()直接调用
-    >>> next(x)
+	23
+	#built-in iterable container不能被next()直接调用
+	>>> next(x)
 	Traceback (most recent call last):
 	  File "<stdin>", line 1, in <module>
 	TypeError: 'list' object is not an iterator
@@ -75,12 +74,12 @@ Building Your Own Iterator in Python
 
 How to use your own iterator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-从客户端代码看，有两种使用方法，可以参考reference-Building Your Own Iterator in Python：
+从客户端代码看，有两种使用方法，可以参考reference/Building Your Own Iterator in Python：
 
 1. 第一步，new an iterator；第二步，next(the-new-iterator)
 2. 第一步，new an iterator；第二步，for element in the-new-iterator
 
-How for loop actually works
+"for语句"是如何给工作的
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 下面的代码中最重要的几点就是 
 

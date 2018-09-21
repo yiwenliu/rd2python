@@ -120,3 +120,12 @@ list comprehension
     <class 'generator'>
 
 3. 用{}包围的comprehension生成的是一个dict object
+
+高级用法
+^^^^^^^^^^^
+参考了<effective python>8th
+
+1. 使用2个条件,默认形成and
+2. 2个循环, 多用于2维列表.但是如果是3维或者以上,请使用for语句
+3. 列表推导式可生成多维列表
+4. 循环可以搭配自己的条件来使用
