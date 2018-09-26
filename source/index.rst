@@ -23,6 +23,7 @@ Welcome to road2python's documentation!
    function
    magic-method
    session-controller
+   abc
    iterator
    generator
    closure

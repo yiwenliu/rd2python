@@ -91,6 +91,7 @@ Dict.keys()等方法的返回值可以用于"for循环语句",说明返回对象
     4
     5
     >>> it = iter(tt)
+    #dict_keyiterator在python3的类图中的位置可以参见"Sequence"章节中的uml图
     >>> it
     <dict_keyiterator object at 0x00000000022E05E8>
     >>> from collections.abc import *

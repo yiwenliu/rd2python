@@ -37,8 +37,20 @@ binary I/O
 
 文件I/O的正确做法
 --------------------
-始终用'b'来open()
 
-因为
-1. 对于非文本文件，例如，image文件，根本无法转化为unicode字符，读入python后，只能是bytes对象
-2. 对于文本文件，编码方式不确定，容易导致读取字符序列后对其decode的失败，所以也先以bytes对象读入python中，想办法 :ref:`确定其编码方式 <detect-codec>` 后，再decode成str对象。
+.. code-block:: python
+    :linenos:
+
+    with open(file_path, 'b') as file_obj:
+        #For reading lines from a file
+        for line in file_obj:
+            pass
+
+1. 始终用'b'来open()
+
+- 对于非文本文件，例如，image文件，根本无法转化为unicode字符，读入python后，只能是bytes对象
+- 对于文本文件，编码方式不确定，容易导致读取字符序列后对其decode的失败，所以也先以bytes对象读入python中，想办法 :ref:`确定其编码方式 <detect-codec>` 后，再decode成str对象。
+
+2. It is good practice to use the with keyword when dealing with file objects. The advantage is that the file is properly closed after its suite finishes, even if an exception is raised at some point. 
+
+3. file_obj是iterable
