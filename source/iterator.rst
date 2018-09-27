@@ -203,6 +203,119 @@ Is actually implemented as
 	        # if StopIteration is raised, break from loop
 	        break
 
+与索引相结合的迭代
+---------------------
+
+在迭代Iterable object时，如果想知道当前元素在列表中的索引，有如下两种思路：
+
+常规想法
+^^^^^^^^^^
+.. code-block:: python
+	:linenos:
+
+	for i in range(len(iterable)):
+	  print('%d: %s' % (i, iterable[i]))
+
+.. code-block:: python
+	:linenos:
+
+	i = 0
+	for element in iterable:
+	    print('%d: %s' % (i, iterable[i]))
+	    i = i+1
+
+Pythonic Way
+^^^^^^^^^^^^^^^^
+(from 《effective python》10th)就需要对“for loop”进行改进。如上一小节所述，"for element in iterable"语句中，element=next(iter(iterbale))，可否让next()，即iterable.__next__(),把索引也返回呢？借助
+`enumerate(iterable, start=0) <https://docs.python.org/3/library/functions.html#enumerate>`_
+
+1. enumerate() Return an enumerate object which is an iterable object also an iterator. 所以，有两种用法：
+
+.. code-block:: python
+	:linenos:
+
+	for index, element in enumerate(iterable):
+	    pass
+
+.. code-block:: python
+	:linenos:
+
+	while True:
+	    try:
+	        item, element = next(enumerate(iterable))
+	        pass
+	    Exception:
+	        break
+
+2. 可以用一个generator function来模拟enumerate()的行为
+
+.. code-block:: python
+	:linenos:
+
+	def enumerate(sequence, start=0):
+	    n = start
+	    for elem in sequence:
+	        yield n, elem
+	        n += 1
+
+平行迭代多个Iterable
+-----------------------
+平行迭代多个Iterable的意思就是“一次迭代就可以得到每个iterable中相同位置的元素”。
+
+常规想法
+^^^^^^^^^^
+1. 用“索引/下标”来平行迭代多份列表。
+2. 把多个Iterable汇成一个"iterable list"，即二维iterable，但是python并未原生提供二维iterable的按列的切片操作，并且多维list会增加复杂性。
+
+Pythonic way
+^^^^^^^^^^^^^^
+指导思想就是 **Returns an iterator of tuples, where the i-th tuple contains the i-th element from each of the argument sequences or iterables.**
+
+1. 如果需要自己来实现这个功能，可以使用“辅助函数”(from <effective python> 4th)
+
+下面这段代码来自于 `官方文档 <https://docs.python.org/3/library/functions.html#zip>`_,
+
+.. code-block:: python
+	:linenos:
+
+	def zip(*iterables):
+	    # 这个函数要达到的效果：zip('ABCD', 'xy') --> Ax By
+	    sentinel = object()
+	    #这是最关键的一步：由“列表推导式”生成一个“list of iterators"
+	    iterators = [iter(it) for it in iterables]
+	    while iterators:
+	        result = []
+	        #遍历list of iterators
+	        for it in iterators:
+				#得到和iterator对应的iterable对象中的元素
+	            elem = next(it, sentinel)
+	            #The iterator stops when the shortest input iterable is exhausted. 
+	            if elem is sentinel:
+	                return
+	            result.append(elem)
+	        yield tuple(result)
+
+2. python3 built-in function
+
+.. code-block:: python
+	:linenos:
+
+	zip(*iterables)
+
+使用zip()需要注意如下几点：
+
+- zip()返回的是一个"zip object"，是一个Iterable对象，见python3的源代码
+
+.. code-block:: python
+	:linenos:
+
+	#Lib/_collections_abc.py
+	zip_iterator = type(iter(zip()))
+	Iterator.register(zip_iterator)
+
+- zip object即可用于"for loop"，又可用于"next()"
+- 传入zip()的iterable list的iterable对象最好是等长。
+
 Why using iterator
 ---------------------------
 iterator其实和定义一个函数以实现一个功能是相同的，为啥不定义一个函数算了呢？

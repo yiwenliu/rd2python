@@ -1,4 +1,4 @@
-了解bytes, str与unicode的区别
+bytes, str
 ====================================
 effective python, 第3条
 

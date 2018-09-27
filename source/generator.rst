@@ -136,6 +136,7 @@ Suppose we have a log file from a famous fast food chain. The log file has a col
 	with open('sells.log', 'rb') as fp:
 	    #读取非空行
 	    pizza_col = (line.split(b' ')[3:4] for line in fp if line.strip())
+	    #可以就把pizza_col当作“列表推导式”，如此，for x in pizza_col就很好理解了
 	    per_hour = (int(x) for x in pizza_col if x != 'N/A')
 	    #sum(iterable)
 	    print("Total pizzas sold = ",sum(per_hour))

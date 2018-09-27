@@ -12,14 +12,14 @@ Welcome to road2python's documentation!
 
    execution-model
    python-init
+   io
+   object
+   data-type
    codec
    dict
    sequence
    list
-   io
-   object
-   read-cmd-args
-   data-type
+   exception
    function
    magic-method
    session-controller
@@ -30,6 +30,7 @@ Welcome to road2python's documentation!
    decorator
    property
    descriptor
+   read-cmd-args
 
 
 
