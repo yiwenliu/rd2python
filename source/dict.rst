@@ -34,15 +34,21 @@ dict_obj.get(key[, default])
 
 Return the value for key if key is in the dictionary, else default. If default is not given, it defaults to None, so that this method **never raises a KeyError**.
 
-Dict comprehension
+字典表达式
 ------------------------
 1. 用{}包围comprehension可以生成dict or  set object
 
 <effective python> p16
 
-Dict view object
+遍历dict
 --------------------
-要遍历dict对象的keys，values或者每一个items，要用到dict的方法，.keys(), .values(), .items()。这3个方法返回的对象都属于Dict view object，它们的特点是 **when the dictionary changes, the view reflects these changes.**
+首先，dict并非iterable，所以不能直接用于"for loop"
+
+1. 遍历dict对象的keys，dict.keys()
+2. 遍历dict对象的values, dict.values()
+3. 或者每一个items， dict.items()。
+
+这3个方法返回的对象都属于Dict view object，它们的特点是 **when the dictionary changes, the view reflects these changes.**
 
 .. code-block:: python
     :linenos:

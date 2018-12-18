@@ -16,6 +16,13 @@ iterator是一种“设计模式”，和“观察者模式”、“访问者模
 2. 然而，迭代器也应该提供一个方法，可以让“client程序”访问到容器类中的元素，在python中是Iterator.__next__()
 3. 一般来说，我们只要实现一个集合，就需要同时提供这个集合的迭代器
 
+Why using iterator
+---------------------------
+从上一小节可以看出，iterator其实和定义一个类方法以实现一个功能是相同的，为啥不定义一个类方法（函数）算了呢？
+
+- 设计模式中，惯用的伎俩就是把操作外化为类
+- 语言提供统一的调用接口，iter(), next()
+
 python3的源码分析
 -----------------------
 
@@ -60,7 +67,7 @@ python3的源码分析
 	            return _check_methods(C, '__iter__', '__next__')
 	        return NotImplemented
 
-2. python3 built-in **iterable type** and corresponding **iterator**, e.g. list and list_iterator
+2. python3对于built-in **iterable type** 都有corresponding **iterator**, e.g. list and list_iterator
 
 Built-in functions using iterable 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -107,6 +114,8 @@ custom class: the OO way
 	:linenos:
 
 	class PowTwo:
+	    """PowTwo首先是一个容器(iterable)，然后才是iterator，
+	    只不过，容器内的数据是在调用next()时生成的，这有点像Generator"""
 	    """Class to implement an iterator
 	    of powers of two"""
 
@@ -176,7 +185,7 @@ How "for loop" actually works
 下面的代码中最重要的几点就是 
 
 - iterable才能用到for语句中去
-- **element == next(iter_obj)**
+- **element = next(iter_obj)**
 
 .. code-block:: none
 	:linenos:
@@ -194,6 +203,7 @@ Is actually implemented as
 	iter_obj = iter(iterable)
 	# infinite loop
 	while True:
+	    #必须要使用try
 	    try:
 	        # get the next item
 	        element = next(iter_obj)
@@ -202,6 +212,8 @@ Is actually implemented as
 	    except StopIteration:
 	        # if StopIteration is raised, break from loop
 	        break
+
+.. _iterate-with-index:
 
 与索引相结合的迭代
 ---------------------
@@ -316,9 +328,25 @@ Pythonic way
 - zip object即可用于"for loop"，又可用于"next()"
 - 传入zip()的iterable list的iterable对象最好是等长。
 
-Why using iterator
----------------------------
-iterator其实和定义一个函数以实现一个功能是相同的，为啥不定义一个函数算了呢？
+.. _iterator-time:
 
-- 设计模式中，惯用的伎俩就是把操作外化为类
-- 语言提供统一的调用接口，iter(), next()
+一个iterator可以使用的次数
+-----------------------------
+无论时generator，还是内建iterable的iterator，都只能产生一轮结果。但是对于iterable就不会有这个限制，例如，一个list可以用于多次for loop。——这是因为“内建迭代器协议”对于__iter__()的约定，"effective python"p40
+
+不仅for loop会遍历iterator，还有很多以iterable为参数的内建函数，都会遍历iterator，例如sum()。
+
+.. code-block:: python
+	:linenos:
+
+	ll = [1,2,3]
+	it1 = iter(ll)
+	for item in it1:
+	    print(item)
+	#这个for不会有任何输出，但是也不会抛出异常StopIteration
+	for item in it1:
+	    print(item)
+
+区别iterable&iterator
+------------------------
+"effective python"p41要点4

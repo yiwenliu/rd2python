@@ -12,6 +12,7 @@ Welcome to road2python's documentation!
 
    execution-model
    python-init
+   virtualenv
    io
    object
    data-type
@@ -26,7 +27,6 @@ Welcome to road2python's documentation!
    abc
    iterator
    generator
-   closure
    decorator
    property
    descriptor

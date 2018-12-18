@@ -33,6 +33,78 @@ class list([iterable])
       File "<stdin>", line 1, in <module>
     TypeError: 'int' object is not iterable
 
+排序
+------
+谈到list排序，肯定想到的就是class List的成员函数list.sort(cmp=None, key=None, reverse=False)，但是有一个隐含的至关重要的概念"sorting key"被忽视了，sort()真正上是依据list items对应的"sorting key"来对items排序的。
+
+1. 默认情况下，list中每个item的值是"sorting key"
+
+.. code-block:: python
+    :linenos:
+
+    # vowels list
+    vowels = ['e', 'a', 'u', 'o', 'i']
+
+    # sort the vowels
+    vowels.sort()
+
+    # print vowels
+    print('Sorted list:', vowels) #Sorted list: ['a', 'e', 'i', 'o', 'u']
+
+2. 如果想自定义"sorting key"，就要用到sort()中的key参数了，显然key参数的值肯定是一个函数，但是对这个函数有一些要求——key parameter to specify a function 
+
+- to be called on each list element prior to making comparisons. 
+- takes a single argument and returns a key to use for sorting purposes. 这个返回的key是“可比较的”就行，不一定是一个数值，例如list, tuple都行，但是dict不行。
+
+.. code-block:: python
+    :linenos:
+
+    # take second element for sort
+    def takeSecond(elem):
+        return elem[1]
+
+    # random list
+    random = [(2, 2), (3, 4), (4, 1), (1, 3)]
+
+    # sort list with key
+    random.sort(key=takeSecond)
+
+    # print list
+    print('Sorted list:', random)
+    #Sorted list: [(4, 1), (2, 2), (1, 3), (3, 4)]
+
+.. _priority-sorting:
+
+优先级排序
+^^^^^^^^^^^^
+有一份列表，其中的元素都是数字，要对其排序，排序时，要把出现在某个群组内的数字，放在群组外的那些数字之前。——言下之意，排序分为2个优先级（阶段），首先把属于某个群组中的数字放在列表前面，然后对前后两个部分分别排序。解决办法就是“使list item对应的sorting key带上prority信息”。
+
+.. code-block:: python
+    :linenos:
+
+    numbers = [8, 3, 1, 2, 5, 4, 7, 6]
+    group = {2, 3, 5, 7}
+
+    def sortp(numbers, group):
+        #把list item对应的sorting key扩充成(1, item) or (0, item)
+        #元组的比较规则：首先比较下标为0的对应元素，如果相等，再比较下标为1的对应元素
+        def helper(x):
+            if x in group:
+                return (0, x)
+            else:
+                return (1, x)
+        numbers.sort(key=helper)
+        #注意，并没有return numbers
+
+    sortp(numbers, group)
+    print(numbers)
+
+遍历
+-------
+如果想在遍历list item同时返回item index，即返回一个元组(index, item), 该怎么办？
+
+:ref:`带索引的迭代 <iterate-with-index>`
+
 访问单个元素而不产生异常
 --------------------------
 访问列表中单个元素时，下标越界，会导致异常，IndexError: list index out of range
@@ -101,7 +173,7 @@ class list([iterable])
     >>> a
     [9, 2, 3, 4, 5]
 
-list comprehension
+列表推导式
 ------------------------
 根据一份列表来制作另一份列表时，就用“列表推导式”。
 
