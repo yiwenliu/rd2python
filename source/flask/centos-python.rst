@@ -1,5 +1,12 @@
 在centos上配置环境
 =====================
+用到的端口
+-----------
+8001 tinyproxy
+80 nginx
+8002 flask
+3128 squid（未使用）
+
 python
 ----------
 安装ssl
@@ -241,7 +248,7 @@ Centos7默认安装了firewalld，如果没有安装的话，可以使用 yum in
 
 2. 重启nginx
 
-方向代理
+反向代理
 ^^^^^^^^^^^^
 1. 定义上游服务器
 
@@ -378,10 +385,49 @@ firewall-cmd --reload
 
 放在后台运行
 -------------
-1. 参考链接：https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/index.html
+1. 使用setsid
 
-#启动虚拟环境
+参考链接：https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/index.html
 
-#setsid python xxx.py
+.. code-block:: none
+	:linenos:
 
-#ps -aux |grep xxx //查看所有在后台运行的进程
+	#启动虚拟环境
+	#setsid python xxx.py
+	#ps -aux |grep xxx //查看所有在后台运行的进程
+
+2.使用nohup
+
+nohup python yourscript.py > myout.file 2>&1 &
+
+3. 脚本 start_newsbrief.sh (采用)
+
+.. code-block:: none
+	:linenos:
+
+	#!/bin/bash
+	cd /root/newsbrief
+	source nb-env/bin/activate
+	nohup python summary.py > newsbrief_out.file 2>&1 &
+
+4. python脚本
+
+首先，我必须创建一个shell脚本来包装“source”命令。这就是说，我使用了“.”。
+
+.. code-block:: none
+	:linenos:
+
+	#!/bin/bash
+	. /path/to/env/bin/activate
+
+然后，从我的python脚本中，我可以这样做：
+
+.. code-block:: none
+	:linenos:
+
+	import os
+	os.system('/bin/bash --rcfile /path/to/myscript.sh')
+
+最后，运行
+
+nohup python yourscript.py > myout.file 2>&1 &
