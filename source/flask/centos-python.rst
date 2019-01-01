@@ -3,8 +3,11 @@
 用到的端口
 -----------
 8001 tinyproxy
-80 nginx
+
+80 nginx----》8003
+
 8002 flask
+
 3128 squid（未使用）
 
 python
