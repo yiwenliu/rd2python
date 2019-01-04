@@ -20,6 +20,7 @@ Welcome to road2python's documentation!
    dict
    sequence
    list
+   set
    exception
    function
    magic-method

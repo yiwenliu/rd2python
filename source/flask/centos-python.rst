@@ -4,7 +4,7 @@
 -----------
 8001 tinyproxy
 
-80 nginx----》8003
+8003 nginx
 
 8002 flask
 
