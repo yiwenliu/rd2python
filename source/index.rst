@@ -18,6 +18,7 @@ Welcome to road2python's documentation!
    data-type
    codec
    dict
+   json
    sequence
    list
    set
