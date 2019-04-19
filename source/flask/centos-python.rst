@@ -1,12 +1,16 @@
-在centos上配置环境
-=====================
+（Flask）在centos上配置环境
+===============================
 用到的端口
 -----------
+虚拟机上允许pc访问的端口是8000-8120
+
 8001 tinyproxy
+
+8002 flask
 
 8003 nginx
 
-8002 flask
+8004 王yi的端口
 
 3128 squid（未使用）
 
@@ -294,8 +298,11 @@ yum -y install squid
 
 打开虚拟机centos防火墙
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-#firewall-cmd --zone=public --add-port=3128/tcp(永久生效再加上 --permanent) //在指定区域打开端口（记得重启防火墙）
-#firewall-cmd --reload //重启防火墙
+.. code-block:: none
+	:linenos:
+
+	#firewall-cmd --zone=public --add-port=3128/tcp(永久生效再加上 --permanent) //在指定区域打开端口（记得重启防火墙）
+	#firewall-cmd --reload //重启防火墙
 
 查看日志 squid
 ^^^^^^^^^^^^^^^^^^
