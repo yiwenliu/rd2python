@@ -53,3 +53,12 @@ application/json
 	r = request.data.decode('utf-8')
 	#不能用json.loads(r)，这是json module的bug
 	args = ast.literal_eval(r)
+
+处理跨域请求
+----------------
+.. code-block:: none
+	:linenos:
+
+	from flask_cors import CORS
+	app = Flask(__name__)
+	CORS(app, resources=r'/*')
