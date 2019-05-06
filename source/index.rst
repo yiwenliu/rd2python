@@ -33,6 +33,9 @@ Welcome to road2python's documentation!
    property
    descriptor
    read-cmd-args
+   web
+   test
+   requests
    crawler/pyspider
    flask/http
    flask/web-server

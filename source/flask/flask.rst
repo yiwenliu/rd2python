@@ -1,5 +1,5 @@
-(Flask)
-============
+(Flask)Flask
+===============
 flask tutorial
 -----------------
 http://docs.jinkan.org/docs/flask/api.html#
@@ -10,11 +10,13 @@ flask返回json串的两种方式
 
 获取请求参数
 ---------------
+flask作为一个服务器，必须要能拿到请求参数。
+
 - request.form.get("key", type=str, default=None) 获取表单数据，
 - request.args.get("key") 获取get请求参数，
 - request.values.get("key") 获取所有参数。推荐使用request.values.get().
 
-常用的请求content-type和对应的flask解析方法
+常用的请求content-type和对应的请求参数解析方法
 ----------------------------------------------
 flask.Request的官方解释
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -23,14 +25,13 @@ http://docs.jinkan.org/docs/flask/api.html#id4
 application/x-www-form-urlencoded
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1）浏览器的原生form表单
-2） 提交的数据按照 key1=val1&key2=val2 的方式进行编码，key和val都进行了URL转码
-
+- 浏览器的原生form表单
+- 提交的数据按照 key1=val1&key2=val2 的方式进行编码，key和val都进行了URL转码
 - request.form.get("key", type=str, default=None) 获取表单数据，
 
 multipart/form-data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-常见的 POST 数据提交的方式,我们使用表单上传文件时，
+常见的 POST 数据提交的方式,我们使用表单上传文件时
 
 application/json
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -62,3 +63,14 @@ application/json
 	from flask_cors import CORS
 	app = Flask(__name__)
 	CORS(app, resources=r'/*')
+
+
+signals
+---------
+这篇 `Flask Signals详解 <https://www.jianshu.com/p/756ed0267f53>`_ 讲的很详细，分为了几个部分。有几个关键词：
+
+- hook, 
+- signals, 
+- mq, 
+- built-in signals ans custome signals
+- 临时性注册一个回调函数
