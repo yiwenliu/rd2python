@@ -36,10 +36,11 @@ Welcome to road2python's documentation!
    web
    test
    requests
+   celery
    crawler/pyspider
-   flask/http
    flask/web-server
    flask/centos-python
+   flask/flask-request
    flask/flask
 
 
