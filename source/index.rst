@@ -37,6 +37,8 @@ Welcome to road2python's documentation!
    test
    requests
    celery
+   pycharm
+   numpy
    crawler/pyspider
    flask/web-server
    flask/centos-python
