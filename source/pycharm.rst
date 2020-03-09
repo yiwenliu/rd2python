@@ -14,4 +14,13 @@ pip安装超时
 
 pip安装时显示找不到包
 -----------------------
-升级pip再安装
+方法1. 升级pip再安装
+
+方法2：下载后，离线安装https://www.lfd.uci.edu/~gohlke/pythonlibs
+
+创建requirements
+--------------------
+.. code-block:: none
+
+	pip freeze >  requirements.txt
+

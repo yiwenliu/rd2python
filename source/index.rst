@@ -10,9 +10,15 @@ Welcome to road2python's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   install_python3
+   anaconda
+   spyder
    execution-model
    python-init
    pyenv
+   pip
+   spacy
+   compare-mt
    io
    object
    data-type
