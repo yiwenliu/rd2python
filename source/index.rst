@@ -45,9 +45,9 @@ Welcome to road2python's documentation!
    celery
    pycharm
    numpy
+   tinyproxy
    crawler/pyspider
    flask/web-server
-   flask/centos-python
    flask/flask-request
    flask/flask
 

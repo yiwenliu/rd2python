@@ -24,3 +24,8 @@ pip安装时显示找不到包
 
 	pip freeze >  requirements.txt
 
+import自定义module
+---------------------
+https://stackoverflow.com/questions/21236824/unresolved-reference-issue-in-pycharm
+
+File-Settings-Build,Execution,Deployment-Console-Python Console-勾选链接中两个勾勾
